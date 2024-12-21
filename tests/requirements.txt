@@ -1,0 +1,1 @@
+https://github.com/yosuke318/lamdba_json_logger.git

@@ -26,8 +26,8 @@ def getLambdaJsonLoggerInstance(level=DEBUG, aws_request_id=None, stage=None):
                     "message": record.getMessage(),
                     "function_name": record.funcName,
                     "module": record.module,
-                    "aws_request_id": record.aws_request_id if hasattr(record, 'aws_request_id') else None,
-                    "stage": record.stage if hasattr(record, 'stage') else "unknown",
+                    "aws_request_id": aws_request_id if hasattr(record, 'aws_request_id') else None,
+                    "stage": stage if hasattr(record, 'stage') else "unknown",
                 }
                 return super().format(json.dumps(record))
 

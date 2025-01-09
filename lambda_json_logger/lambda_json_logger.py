@@ -10,7 +10,7 @@ LOG_LEVELS = {
 }
 
 
-def getLambdaJsonLoggerInstance(level=DEBUG, aws_request_id=None, stage=None):
+def getLambdaJsonLoggerInstance(level=DEBUG, context=None, stage=None):
     # Getting logger instance
     logger = getLogger("lambda_json_logger")
     logger.setLevel(level)
@@ -26,8 +26,8 @@ def getLambdaJsonLoggerInstance(level=DEBUG, aws_request_id=None, stage=None):
                     "message": record.getMessage(),
                     "function_name": record.funcName,
                     "module": record.module,
-                    "aws_request_id": aws_request_id if hasattr(record, 'aws_request_id') else None,
-                    "stage": stage if hasattr(record, 'stage') else "unknown",
+                    "aws_request_id": context.aws_request_id if context else None,
+                    "stage": stage,
                 }
                 return json.dumps(record)
 

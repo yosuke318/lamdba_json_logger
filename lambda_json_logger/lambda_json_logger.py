@@ -29,7 +29,7 @@ def getLambdaJsonLoggerInstance(level=DEBUG, aws_request_id=None, stage=None):
                     "aws_request_id": aws_request_id if hasattr(record, 'aws_request_id') else None,
                     "stage": stage if hasattr(record, 'stage') else "unknown",
                 }
-                return super().format(json.dumps(record))
+                return super().format(record)
 
         stream_handler.setFormatter(LambdaJsonFormatter())
         logger.addHandler(stream_handler)
